@@ -18,9 +18,22 @@ module Spree
 	     line_item.product.tax_category == rate.tax_category
 	end
        line_items_total = matched_line_items.sum(&:total) 
-       adjusted_total = line_items_total + order.promotions_total
-       puts "Total of promotions in  promotions_tax: #{order.promotions_total}"
-       order.line_items.empty? ? 0 : adjusted_total * rate.amount
+
+       unless adjustments.promotion.blank?
+
+	  cloud_rate = tax_cloud_transaction.amount / line_items_total
+
+	  adjusted_total = line_items_total + order.promotions_total
+
+	  puts "Total of promotions in  promotions_tax: #{}"
+
+	  round_to_two_places( adjusted_total * cloud_rate ) 
+
+       else
+
+	  round_to_two_places(line_items_total * cloud_rate) 
+	 
+       end 
      end
 
      def compute_line_item(line_item) 
