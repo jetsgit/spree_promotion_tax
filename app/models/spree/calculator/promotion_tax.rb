@@ -18,7 +18,7 @@ module Spree
 	     line_item.product.tax_category == rate.tax_category
 	end
        line_items_total = matched_line_items.sum(&:total) 
-       adjusted_total = line_items_total + order.adjustments.eligible.promotion.sum(&:amount)  
+       adjusted_total = line_items_total + order.promotions_total
        order.line_items.empty? ? 0 : adjusted_total * rate.amount
      end
 
