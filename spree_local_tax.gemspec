@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Local tax calculation for Spree Commerce'
   s.description = 'Calculate tax after deducting amount of promotion'
                   
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 1.9.3'
 
   s.author    = 'Jerrold thompson'
   s.email     = 'jet@whidbey.com'
