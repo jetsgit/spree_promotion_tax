@@ -19,22 +19,20 @@ module Spree
 	end
        line_items_total = matched_line_items.sum(&:total) 
 
-       unless order.adjustments.promotion.blank? || order.tax_cloud_transaction.nil? 
-
-	  cloud_rate = order.tax_cloud_transaction.amount / ( line_items_total + order.ship_total )  
+       unless order.adjustments.promotion.blank? 
 
 	  adjusted_total = line_items_total + order.promotions_total + order.ship_total
 
-	  unless (adjusted_total.nil? || cloud_rate == 0) 
-	     round_to_two_places( adjusted_total * cloud_rate ) 
+	  unless adjusted_total.nil?  
+	     round_to_two_places( adjusted_total * rate.amount ) 
 	  else
 	     0
 	  end
 	
        else
 
-	  unless (line_items_total.nil? || cloud_rate.nil?)
-	     round_to_two_places(line_items_total * cloud_rate) 
+	  unless line_items_total.nil? 
+	     round_to_two_places(line_items_total * rate.amount) 
 	  else 
 	     0
 	  end
