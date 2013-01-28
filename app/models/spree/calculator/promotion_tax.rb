@@ -20,23 +20,14 @@ module Spree
        line_items_total = matched_line_items.sum(&:total) 
 
        unless order.adjustments.promotion.blank? 
-
 	  adjusted_total = line_items_total + order.promotions_total + order.ship_total
-
 	  unless adjusted_total.nil?  
 	     round_to_two_places( adjusted_total * rate.amount ) 
 	  else
 	     0
 	  end
-	
        else
-
-	  unless line_items_total.nil? 
 	     round_to_two_places(line_items_total * rate.amount) 
-	  else 
-	     0
-	  end
-	 
        end 
      end
 
