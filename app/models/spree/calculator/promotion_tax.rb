@@ -17,28 +17,28 @@ module Spree
 	matched_line_items = order.line_items.select do |line_item|
 	     line_item.product.tax_category == rate.tax_category
 	end
+	
        line_items_total = matched_line_items.sum(&:total) 
 
-       unless order.adjustments.promotion.blank? || order.tax_cloud_transaction.nil? 
+       unless order.tax_cloud_transaction.nil?
 
-	  cloud_rate = order.tax_cloud_transaction.amount / ( line_items_total + order.ship_total )  
+	    cloud_rate = order.tax_cloud_transaction.amount / ( line_items_total + order.ship_total )  
 
-	  adjusted_total = line_items_total + order.promotions_total + order.ship_total
+	    unless order.adjustments.promotion.blank? 
 
-	  unless (adjusted_total.nil? || cloud_rate == 0) 
-	     round_to_two_places( adjusted_total * cloud_rate ) 
-	  else
-	     0
-	  end
+		adjusted_total = line_items_total + order.promotions_total + order.ship_total
+
+		unless adjusted_total.nil?  
+		   round_to_two_places( adjusted_total * cloud_rate ) 
+		else
+		   round_to_two_places(line_items_total * cloud_rate)
+		end
+	    end
 	
        else
 
-	  unless (line_items_total.nil? || cloud_rate.nil?)
-	     round_to_two_places(line_items_total * cloud_rate) 
-	  else 
-	     0
-	  end
-	 
+	  round_to_two_places(line_items_total * rate.amount) 
+
        end 
      end
 
