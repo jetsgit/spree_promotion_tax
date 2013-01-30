@@ -29,9 +29,13 @@ module Spree
 		adjusted_total = line_items_total + order.promotions_total + order.ship_total
 
 		unless adjusted_total.nil?  
+
 		   round_to_two_places( adjusted_total * cloud_rate ) 
+
 		else
+
 		   round_to_two_places(line_items_total * cloud_rate)
+
 		end
 	    end
 	
