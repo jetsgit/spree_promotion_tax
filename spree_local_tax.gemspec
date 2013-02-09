@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 
   s.author    = 'Jerrold thompson'
   s.email     = 'jet@whidbey.com'
-  s.homepage  = 'github.com/bluehandtalking/spree_promotion_tax'
+  s.homepage  = 'https://github.com/bluehandtalking/spree_promotion_tax'
 
   s.require_path = 'lib'
   s.requirements << 'none'
