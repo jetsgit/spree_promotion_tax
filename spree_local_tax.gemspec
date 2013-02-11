@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_promotion_tax'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.summary     = 'Local tax calculation for Spree Commerce'
   s.description = 'Calculate tax after deducting amount of promotion'
                   
