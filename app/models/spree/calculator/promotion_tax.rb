@@ -7,10 +7,10 @@ module Spree
       end
 
       def compute(computable)
-	 super
+				super
       end
 
-      private
+   private
 
       def rate
 	 self.calculable
